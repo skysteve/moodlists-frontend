@@ -1,0 +1,40 @@
+{
+  "name": "moodlists-frontend",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "description": "Frontend Repo for moodlist.skysteve.com",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "run-p build-sass build-ts copy-index",
+    "build-sass": "sass sass/index.scss build/index.css --load-path node_modules --style compressed",
+    "build-ts": "rollup --config rollup.config.js --no-esModule",
+    "copy-index": "cp html/index.html build/",
+    "run-local": "run-p serve copy-index watch-sass watch-ts",
+    "serve": "http-server build -p 8012",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-sass": "sass sass/index.scss build/index.css --load-path node_modules --watch",
+    "watch-ts": "rollup --config rollup.config.js --no-esModule --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skysteve/moodlists-frontend.git"
+  },
+  "author": "skysteve",
+  "bugs": {
+    "url": "https://github.com/skysteve/moodlists-frontend/issues"
+  },
+  "homepage": "https://github.com/skysteve/moodlists-frontend#readme",
+  "dependencies": {
+    "bulma": "^0.7.4",
+    "sass": "^1.17.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.1.2",
+    "rollup-plugin-tslint": "^0.2.2",
+    "rollup-plugin-typescript": "^1.0.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}

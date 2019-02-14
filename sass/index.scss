@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+// Customization
+$primary: #FB5050;
+$navbar-item-color: hsl(0, 0%, 96%);
+
+@import "bulma/sass/utilities/_all.sass";
+@import "bulma/sass/grid/columns.sass";
+
+.navbar-title {
+    font-weight: bold;
+}
