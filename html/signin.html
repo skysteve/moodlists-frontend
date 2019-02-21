@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mood Lists sign in</title>
+    <script>
+      const search = location.search.substring(1);
+      const data = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+      const event = new CustomEvent('loadedTokens', { detail: data });
+      window.parent.document.querySelector('#iframe-login').dispatchEvent(event)
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

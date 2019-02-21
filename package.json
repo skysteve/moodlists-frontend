@@ -8,10 +8,12 @@
     "build": "run-p build-sass build-ts copy-index",
     "build-sass": "sass sass/index.scss build/index.css --load-path node_modules --style compressed",
     "build-ts": "rollup --config rollup.config.js --no-esModule",
-    "copy-index": "cp html/index.html build/",
-    "run-local": "run-p serve copy-index watch-sass watch-ts",
-    "serve": "http-server build -p 8012",
+    "copy-index": "mkdir -p build; cp -r html/* build/",
+    "run-local": "run-p serve watch-copy-index watch-sass watch-ts",
+    "serve": "http-server build -p 8012 -o",
+    "start": "yarn run-local",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch-copy-index": "onchange -i 'html/**/*.html' -- npm run copy-index",
     "watch-sass": "sass sass/index.scss build/index.css --load-path node_modules --watch",
     "watch-ts": "rollup --config rollup.config.js --no-esModule --watch"
   },
@@ -31,6 +33,7 @@
   "devDependencies": {
     "http-server": "^0.11.1",
     "npm-run-all": "^4.1.5",
+    "onchange": "^5.2.0",
     "prettier": "1.16.4",
     "rollup": "^1.1.2",
     "rollup-plugin-tslint": "^0.2.2",

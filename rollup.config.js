@@ -33,13 +33,13 @@ export default [
     },
     plugins
   },
-  // {
-  //   input: 'src/workers/spotifyApiHelper/index.ts',
-  //   output: {
-  //     file: 'build/workers/spotifyApiHelper.js',
-  //     format: 'iife',
-  //     sourcemap: true
-  //   },
-  //   plugins: [tsPlugin]
-  // }
+  {
+    input: 'src/workers/spotifyApiHelper/index.ts',
+    output: {
+      file: 'build/workers/spotifyApiHelper.js',
+      format: 'iife',
+      sourcemap: true
+    },
+    plugins: [tsPlugin]
+  }
 ];
