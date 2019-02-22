@@ -1,5 +1,6 @@
-import { IKnobsSate } from '../../stateStore/reducers/knobs';
 import { IPlaylistData } from '../../interfaces/WorkerMessage';
+import { ISpotifyUser } from '../../interfaces/spotify/SpotifyUser';
+import { IAuthTokens } from '../../interfaces/AuthTokens';
 
 const ROOT_URL = 'https://api.spotify.com/v1';
 const AUTH_URL = 'http://localhost:3847'; // 'https://iskpng28a8.execute-api.eu-west-1.amazonaws.com/Prod'; //'http://localhost:3000';
@@ -26,11 +27,17 @@ export class ApiHelper {
     return AUTH_URL;
   }
 
+  public set tokens(tokens: IAuthTokens) {
+    this.accessToken = tokens.access_token;
+    this.refreshToken = tokens.refresh_token;
+    this.expiresAt = tokens.expiresAt || 0;
+  }
+
   public hasAuthToken(): boolean {
     return !!this.accessToken;
   }
 
-  public getUserData(): Promise<any> {
+  public getUserData(): Promise<ISpotifyUser> {
     return this.makeRequest('me', REQUEST_TYPE.GET);
   }
 
@@ -40,7 +47,7 @@ export class ApiHelper {
     return await this.makeRequest(`search?${queryString}`);
   }
 
-  public async loadRecommendations(artists: any[] = [], knobs?: IKnobsSate, limit: number = 25) {
+  public async loadRecommendations(artists: any[] = [], knobs?: any, limit: number = 25) {
     const seedArtists = artists.map(artist => artist.id);
     const knobsToQS = !knobs ? null : Object.keys(knobs).map(k => {
       // duration is a bit different - we need to multiply the seconds to ms

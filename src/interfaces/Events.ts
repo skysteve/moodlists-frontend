@@ -1,3 +1,5 @@
 export enum EventTypes {
-  userData = 'userData'
+  authTokensLoaded = 'authTokensLoaded',
+  userData = 'userData',
+  userSigninRequired = 'userSigninRequired'
 }

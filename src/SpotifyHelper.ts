@@ -1,5 +1,8 @@
 import { UserDataLoadedEvent } from './events/UserDataLoadedEvent';
+import { UserSigninRequiredEvent } from './events/UserSigninRequiredEvent';
 import { IWorkerMessage, IWorkerResponseMessage, MessageType } from './interfaces/WorkerMessage';
+import { EventTypes } from './interfaces/Events';
+import { TokensLoadedEvent } from './events/TokensLoadedEvent';
 
 export class SpotifyHelper {
   private spotifyWorker: Worker;
@@ -11,6 +14,7 @@ export class SpotifyHelper {
     window.location.hash = '';
     this.spotifyWorker.onmessage = this.onWorkerMessage.bind(this);
     this.inFlightRequests = {};
+    window.addEventListener(EventTypes.authTokensLoaded, this.onAuthTokensLoaded.bind(this));
   }
 
   public makeRequest(message: IWorkerMessage) {
@@ -30,14 +34,16 @@ export class SpotifyHelper {
       const { data, error, messageId, type } = eventBody;
 
       if (type === MessageType.authRequired) {
-        return console.log('Login required'); // TODO - something better here
+        const siginEvent = new UserSigninRequiredEvent();
+        window.dispatchEvent(siginEvent);
+        return;
       }
 
 
       if (type === MessageType.userData) {
         const userEvent = new UserDataLoadedEvent(event.data.data.user);
         window.dispatchEvent(userEvent);
-        return console.log('USER DATA', event.data.data.user);
+        return;
       }
 
       if (messageId) {
@@ -56,11 +62,18 @@ export class SpotifyHelper {
 
   private constructAuthHash(): string {
     const tokens = {
-      access_token: localStorage.getItem('access_token'),
-      refresh_token: localStorage.getItem('refresh_token'),
-      expiresAt: localStorage.getItem('expires_at'),
+      access_token: localStorage.getItem('access_token') || '',
+      refresh_token: localStorage.getItem('refresh_token') || '',
+      expiresAt: localStorage.getItem('expires_at') || '',
     };
 
     return `access_token=${tokens.access_token}&refresh_token=${tokens.refresh_token}&expiresAt=${tokens.expiresAt}`;
+  }
+
+  private onAuthTokensLoaded(event: TokensLoadedEvent): void {
+    this.spotifyWorker.postMessage({
+      type: MessageType.authTokensLoaded,
+      tokens: event.tokens
+    });
   }
 }

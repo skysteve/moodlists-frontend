@@ -1,5 +1,6 @@
 export enum MessageType {
   authRequired = 'authRequired',
+  authTokensLoaded = 'authTokensLoaded',
   connected = 'connected',
   createPlaylist = 'createPlaylist',
   error = 'error',

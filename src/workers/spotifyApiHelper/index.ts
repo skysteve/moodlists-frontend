@@ -3,6 +3,25 @@ import { ApiHelper } from './ApiHelper';
 
 const apiHelper = new ApiHelper();
 
+function loadUser() {
+  apiHelper.getUserData()
+  .then((user) => {
+    postMessage({
+      type: MessageType.userData,
+      data: {
+        user
+      }
+    });
+  })
+  .catch((ex) => {
+    console.error('Failed to load user data', ex);
+    postMessage({
+      error: ex.message || ex,
+      type: MessageType.error
+    });
+  });
+}
+
 onmessage = async function onmessage(event: MessageEvent) {
   const messageBody = event.data as IWorkerMessage;
   const messageId = messageBody.messageId;
@@ -11,6 +30,9 @@ onmessage = async function onmessage(event: MessageEvent) {
 
   try {
     switch (messageBody.type) {
+      case MessageType.authTokensLoaded:
+       apiHelper.tokens = (messageBody as any).tokens;
+       return loadUser();
       case MessageType.connected:
         break; // don't actually need to do anything here
       case  MessageType.createPlaylist:
@@ -54,20 +76,5 @@ if (!apiHelper.hasAuthToken()) {
     }
   });
 } else {
-  apiHelper.getUserData()
-    .then((user) => {
-      postMessage({
-        type: MessageType.userData,
-        data: {
-          user
-        }
-      });
-    })
-    .catch((ex) => {
-      console.error('Failed to load user data', ex);
-      postMessage({
-        ex,
-        type: MessageType.error
-      });
-    });
+  loadUser();
 }

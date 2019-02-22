@@ -1,4 +1,5 @@
 import {AbstractModal} from './Abstract';
+import {TokensLoadedEvent} from '../../events/TokensLoadedEvent';
 
 export class SignInModal extends AbstractModal {
   protected renderContent(): DocumentFragment {
@@ -12,6 +13,7 @@ export class SignInModal extends AbstractModal {
       throw new Error('Could not find expected iframe');
     }
 
+    // not using event types here because we're using super basic JS in the iframe
     elIframe.addEventListener('loadedTokens', this.onTokensLoaded.bind(this));
 
     return clone;
@@ -22,14 +24,16 @@ export class SignInModal extends AbstractModal {
   }
 
   private onTokensLoaded(event: CustomEvent): void {
-    if (event.detail && event.detail.access_token) {
-      this.closeModal();
-      this.storeTokens(event.detail);
-      return;
+    if (!event.detail || !event.detail.access_token) {
+      // not actually sure how you'd get here, but best to say something rather than silence
+      return alert('Failed to log in to Spotify');
     }
 
-    // not actually sure how you'd get here, but best to say something rather than silence
-    alert('Failed to log in to Spotify');
+
+    this.closeModal();
+    this.storeTokens(event.detail);
+    const loadedEvent = new TokensLoadedEvent(event.detail);
+    window.dispatchEvent(loadedEvent);
   }
 
   private storeTokens(tokens: {access_token: string, refresh_token: string, expiresAt: string}): void {
