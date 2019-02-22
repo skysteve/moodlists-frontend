@@ -1,11 +1,11 @@
 export class SearchBar extends HTMLInputElement {
+
   constructor() {
     super();
-    console.log('hi');
-    this.addEventListener('keypress', this.onKeypress.bind(this));
+
+    // TODO - might put some stuff in here?
   }
 
-  private onKeypress(event) {
-    console.log(event);
-  }
+
+
 }
