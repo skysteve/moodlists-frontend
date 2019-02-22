@@ -1,4 +1,4 @@
-import { EventTypes } from './interfaces/Events';
+import { UserDataLoadedEvent } from './events/UserDataLoadedEvent';
 import { IWorkerMessage, IWorkerResponseMessage, MessageType } from './interfaces/WorkerMessage';
 
 export class SpotifyHelper {
@@ -35,7 +35,7 @@ export class SpotifyHelper {
 
 
       if (type === MessageType.userData) {
-        const userEvent = new CustomEvent(EventTypes.userData, {detail: event.data.data.user});
+        const userEvent = new UserDataLoadedEvent(event.data.data.user);
         window.dispatchEvent(userEvent);
         return console.log('USER DATA', event.data.data.user);
       }

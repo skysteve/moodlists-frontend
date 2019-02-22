@@ -1,5 +1,6 @@
 import {SignInModal} from './modals/SignInModal';
 import { EventTypes } from '../interfaces/Events';
+import { UserDataLoadedEvent } from '../events/UserDataLoadedEvent';
 
 export class NavBar {
   private el: HTMLElement;
@@ -21,8 +22,8 @@ export class NavBar {
     document.body.appendChild(signInModal);
   }
 
-  private onUserDataLoaded(event: CustomEvent): void {
-    this.user = event.detail;
+  private onUserDataLoaded(event: UserDataLoadedEvent): void {
+    this.user = event.user;
 
     // TODO - hide the sign in, show a template with user data in it
     const elSignIn = this.el.querySelector('#nav-sign-in') as HTMLAnchorElement;

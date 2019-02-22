@@ -2,7 +2,7 @@ import { IKnobsSate } from '../../stateStore/reducers/knobs';
 import { IPlaylistData } from '../../interfaces/WorkerMessage';
 
 const ROOT_URL = 'https://api.spotify.com/v1';
-const AUTH_URL = 'http://localhost:3000' // 'https://iskpng28a8.execute-api.eu-west-1.amazonaws.com/Prod'; //'http://localhost:3000';
+const AUTH_URL = 'http://localhost:3847'; // 'https://iskpng28a8.execute-api.eu-west-1.amazonaws.com/Prod'; //'http://localhost:3000';
 
 enum REQUEST_TYPE {
   GET = 'get',
