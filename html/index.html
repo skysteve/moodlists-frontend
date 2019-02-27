@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mood Lists</title>
-    <link rel="stylesheet" href="/index.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <script src="/app.js"></script>
   </head>
   <body>
@@ -41,12 +41,9 @@
 
     <template id="section-seed-list">
 
-      <field-group label="Artist Name">
-          <input slot="input" class="input" type="text" placeholder="Text input" is="search-bar">
-      </field-group>
-      <ul>
-
-      </ul>
+      <search-bar label="Artist Name">
+        <input slot="input" class="input is-fullwidth" type="text" placeholder="e.g. Gareth Emery" />
+      </search-bar>
 
     </template>
 

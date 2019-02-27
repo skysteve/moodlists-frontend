@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "run-p build-sass build-ts copy-index",
-    "build-sass": "sass sass/index.scss build/index.css --load-path node_modules --style compressed",
+    "build-sass": "sass sass:build/css --load-path node_modules --style compressed",
     "build-ts": "rollup --config rollup.config.js --no-esModule",
     "copy-index": "mkdir -p build; cp -r html/* build/",
     "run-local": "run-p serve watch-copy-index watch-sass watch-ts",
@@ -14,7 +14,7 @@
     "start": "yarn run-local",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch-copy-index": "onchange -i 'html/**/*.html' -- npm run copy-index",
-    "watch-sass": "sass sass/index.scss build/index.css --load-path node_modules --watch",
+    "watch-sass": "sass sass:build/css --load-path node_modules --watch",
     "watch-ts": "rollup --config rollup.config.js --no-esModule --watch"
   },
   "repository": {

@@ -2,9 +2,9 @@
 const template = document.createElement('template');
 // TODO - I don't like the stylesheet here, it's messy
 template.innerHTML = `
-<link rel="stylesheet" href="/index.css" />
+<link rel="stylesheet" href="/css/index.css" />
 <label class="label"></label>
-<div class="control">
+<div class="control is-expanded">
   <slot name="input"></slot>
 </div>
 `;

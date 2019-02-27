@@ -1,0 +1,12 @@
+.result-list {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  color: blue;
+
+  ul {
+    li {
+      cursor: pointer;
+    }
+  }
+}

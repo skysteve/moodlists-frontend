@@ -6,14 +6,17 @@ $primary: #FB5050;
 @import "bulma/sass/utilities/_all.sass";
 @import "bulma/sass/base/_all.sass";
 @import "bulma/sass/grid/columns.sass";
+
+@import "bulma/sass/elements/button.sass";
 @import "bulma/sass/elements/form.sass";
+
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/components/modal.sass";
 
-.navbar-title {
-    font-weight: bold;
-}
 
+.navbar-title {
+  font-weight: bold;
+}
 
 .content-centered {
   justify-content: center;
