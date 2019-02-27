@@ -1,8 +1,15 @@
-import { SpotifyHelper, spotifyHelperInstance} from '../SpotifyHelper';
-import { debounce } from '../helpers';
-import { MessageType } from '../interfaces/WorkerMessage';
+import {ISpotifyArtistSearchResults} from '../../interfaces/spotify/SpotifyAristSearchResults';
+import { MessageType } from '../../interfaces/WorkerMessage';
 
+import { SpotifyHelper, spotifyHelperInstance} from '../../SpotifyHelper';
+import { debounce } from '../../helpers';
+
+import { SearchResultsChangedEvent } from '../../events/SearchResultsChangedEvent';
+
+// TODO - I think this should extend field, just the input is messy
 export class SearchBar extends HTMLInputElement {
+  // tslint:disable-next-line:variable-name
+  private _searchResults: ISpotifyArtistSearchResults | undefined;
   private spotifyHelper: SpotifyHelper;
   private searchInFlight: boolean = false;
 
@@ -12,6 +19,10 @@ export class SearchBar extends HTMLInputElement {
 
     this.spotifyHelper = spotifyHelperInstance;
     this.addEventListener('keypress', debounce(this.onSearchKeypress.bind(this), 250));
+  }
+
+  public get searchResults(): ISpotifyArtistSearchResults | undefined {
+    return this._searchResults;
   }
 
   private async onSearchKeypress(event: KeyboardEvent) {
@@ -30,7 +41,7 @@ export class SearchBar extends HTMLInputElement {
 
     this.searchInFlight = true;
     try {
-      const searchResults:any = await this.spotifyHelper.makeRequest({
+      const searchResults: ISpotifyArtistSearchResults = await this.spotifyHelper.makeRequest({
         type: MessageType.search,
         searchQuery: {
           query,
@@ -38,13 +49,10 @@ export class SearchBar extends HTMLInputElement {
         }
       });
 
-      // TODO - this is just a hack for now to test
-      searchResults.artists.items.forEach((artist) => {
-        const elLi = document.createElement('li');
-        elLi.textContent = artist.name;
-        this.appendChild(elLi);
-      });
-
+      // store search results and dispatch update with new results
+      this._searchResults = searchResults;
+      const resultsChangeEvent = new SearchResultsChangedEvent(searchResults);
+      this.dispatchEvent(resultsChangeEvent);
     } catch (ex) {
       alert(`Failed to load search results ${ex.message || ex}`);
     }

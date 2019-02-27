@@ -17,7 +17,7 @@ export class SpotifyHelper {
     window.addEventListener(EventTypes.authTokensLoaded, this.onAuthTokensLoaded.bind(this));
   }
 
-  public makeRequest(message: IWorkerMessage) {
+  public makeRequest(message: IWorkerMessage): Promise<any> {
     this.messageId++;
     return new Promise((resolve, reject) => {
       this.inFlightRequests[this.messageId] = { resolve, reject };
