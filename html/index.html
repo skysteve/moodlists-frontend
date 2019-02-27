@@ -40,10 +40,14 @@
     </div>
 
     <template id="section-seed-list">
-      <input type="text" is="search-bar" class="input" />
+
+      <field-group label="Artist Name">
+          <input slot="input" class="input" type="text" placeholder="Text input" is="search-bar">
+      </field-group>
       <ul>
 
       </ul>
+
     </template>
 
     <!-- TODO can we load this only when necessary? -->

@@ -1,45 +1,28 @@
 
-import {SpotifyHelper} from './SpotifyHelper';
-import {LoadingIcon} from './components/icons/LoadingIcon';
+import * as components from './components';
 import {NavBar} from './components/NavBar';
-import {SearchBar} from './components/SearchBar';
-import {SignInModal} from './components/modals/SignInModal';
-import {SeedList} from './components/sections/SeedList';
 import { EventTypes } from './interfaces/Events';
 import { UserDataLoadedEvent } from './events/UserDataLoadedEvent';
 
-function registerComponents() {
-  customElements.define('loading-icon', LoadingIcon);
-  customElements.define('search-bar', SearchBar, {extends: 'input'});
-  customElements.define('sign-in-modal', SignInModal);
-  customElements.define('seed-list', SeedList);
-}
-
-function init() {
-  const spotifyHelper = new SpotifyHelper();
-  const navBar = new NavBar();
-
+// we need to pass in components to make TS/rollup happy the files are being used
+function init(componentList: any) {
   const elContainer = document.getElementById('main-content') as HTMLDivElement;
 
   window.addEventListener(EventTypes.userData, (event: UserDataLoadedEvent) => {
-    elContainer.innerHTML = '';
-    elContainer.appendChild(new SeedList(spotifyHelper));
+    elContainer.innerHTML = '<seed-list></seed-list>';
   });
 
   // this just stop TS complaining about unused vars
-  return [spotifyHelper, navBar];
+  return new NavBar();
 }
-
-// register components first
-registerComponents();
 
 // if the document has already loaded - just call init, otherwise wait until it's ready
 if (document.readyState === 'interactive' || document.readyState === 'complete') {
-  init();
+  init(components);
 } else {
   document.addEventListener('readystatechange', () => {
     if (document.readyState === 'interactive') {
-      init();
+      init(components);
     }
   });
 }

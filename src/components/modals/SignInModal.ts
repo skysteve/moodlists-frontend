@@ -19,7 +19,7 @@ export class SignInModal extends AbstractModal {
     return clone;
   }
 
-  protected get title() {
+  public get title() {
     return 'Sign in to Spotify';
   }
 
@@ -41,4 +41,7 @@ export class SignInModal extends AbstractModal {
     localStorage.setItem('refresh_token', tokens.refresh_token);
     localStorage.setItem('expires_at', tokens.expiresAt);
   }
+
 }
+
+customElements.define('sign-in-modal', SignInModal);

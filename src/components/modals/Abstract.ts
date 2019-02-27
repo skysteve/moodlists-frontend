@@ -29,7 +29,7 @@ export class AbstractModal extends HTMLElement {
     return document.createDocumentFragment();
   }
 
-  protected get title(): string {
+  public get title(): string {
     return '';
   }
 

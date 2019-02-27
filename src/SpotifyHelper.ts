@@ -77,3 +77,5 @@ export class SpotifyHelper {
     });
   }
 }
+
+export const spotifyHelperInstance = new SpotifyHelper();

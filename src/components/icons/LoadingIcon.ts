@@ -26,3 +26,6 @@ export class LoadingIcon extends HTMLElement {
   </svg>`;
   }
 }
+
+
+customElements.define('loading-icon', LoadingIcon);
