@@ -1,3 +1,7 @@
+import { EventTypes } from '../../interfaces/Events';
+import { SearchResultsChangedEvent } from '../../events/SearchResultsChangedEvent';
+import { SearchResultsPanel } from '../ui-elements/SearchResultsPanel';
+
 export class SeedList extends HTMLElement {
 
   constructor() {
@@ -9,6 +13,16 @@ export class SeedList extends HTMLElement {
     const clone = document.importNode(template.content, true);
 
     this.appendChild(clone);
+
+    this.addEventListener(EventTypes.searchResultsLoaded, this.onSearchResultsLoaded.bind(this));
+  }
+
+  private onSearchResultsLoaded(event: SearchResultsChangedEvent) {
+    event.stopPropagation();
+    console.log('%cLoaded search results', 'color: green;');
+    const elSearchResults = this.querySelector('search-results-panel') as SearchResultsPanel;
+
+    elSearchResults.searchResults = event.searchResults;
   }
 
 }

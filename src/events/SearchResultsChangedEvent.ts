@@ -3,7 +3,8 @@ import { ISpotifyArtistSearchResults } from '../interfaces/spotify/SpotifyAristS
 
 export class SearchResultsChangedEvent extends CustomEvent<{}> {
   constructor(searchResults: ISpotifyArtistSearchResults) {
-    super(EventTypes.authTokensLoaded, {
+    super(EventTypes.searchResultsLoaded, {
+      bubbles: true,
       detail: searchResults
     });
   }

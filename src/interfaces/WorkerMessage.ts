@@ -6,6 +6,7 @@ export enum MessageType {
   error = 'error',
   loadRecommendations = 'loadRecommendations',
   search = 'search',
+  storeAuthTokens = 'storeAuthTokens',
   userData = 'userData'
 }
 

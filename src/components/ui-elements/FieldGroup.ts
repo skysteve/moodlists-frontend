@@ -1,8 +1,6 @@
 
 const template = document.createElement('template');
-// TODO - I don't like the stylesheet here, it's messy
 template.innerHTML = `
-<link rel="stylesheet" href="/css/index.css" />
 <label class="label"></label>
 <div class="control is-expanded">
   <slot name="input"></slot>
@@ -14,10 +12,14 @@ export class FieldGroup extends HTMLElement {
   constructor() {
     super();
     this.classList.add('field');
-    const shadowRoot = this.attachShadow({mode: 'open'});
-    shadowRoot.appendChild(template.content.cloneNode(true));
 
-    (shadowRoot.querySelector('.label') as HTMLLabelElement).textContent = this.getAttribute('label');
+    // TODO - I don't like this, but for now it works
+    const elTemplate = template.content.cloneNode(true) as HTMLElement;
+    (elTemplate.querySelector('.control') as HTMLDivElement).innerHTML = this.innerHTML;
+    this.innerHTML = '';
+    // const shadowRoot = this.attachShadow({mode: 'open'});
+    this.appendChild(elTemplate);
+    (this.querySelector('.label') as HTMLLabelElement).textContent = this.getAttribute('label');
   }
 
 }

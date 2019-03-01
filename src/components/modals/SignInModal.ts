@@ -31,15 +31,8 @@ export class SignInModal extends AbstractModal {
 
 
     this.closeModal();
-    this.storeTokens(event.detail);
     const loadedEvent = new TokensLoadedEvent(event.detail);
     window.dispatchEvent(loadedEvent);
-  }
-
-  private storeTokens(tokens: {access_token: string, refresh_token: string, expiresAt: string}): void {
-    localStorage.setItem('access_token', tokens.access_token);
-    localStorage.setItem('refresh_token', tokens.refresh_token);
-    localStorage.setItem('expires_at', tokens.expiresAt);
   }
 
 }

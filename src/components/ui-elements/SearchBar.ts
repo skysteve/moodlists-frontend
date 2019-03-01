@@ -9,19 +9,10 @@ import { FieldGroup } from './FieldGroup';
 
 const addonTemplate = document.createElement('template');
 addonTemplate.innerHTML = `<div class="control">
-  <button type="submit" class="button is-primary">Search</button>
+  <button class="button is-primary">Search</button>
 </div>
 `;
 
-const resultListTemplate = document.createElement('template');
-resultListTemplate.innerHTML = `
-<link rel="stylesheet" href="/css/components/search-bar.css">
-<div class="result-list">
-  <ul></ul>
-</div>
-`;
-
-// TODO - I think this should extend field, just the input is messy
 export class SearchBar extends FieldGroup {
   // tslint:disable-next-line:variable-name
   private _searchResults: ISpotifyArtistSearchResults | undefined;
@@ -30,21 +21,21 @@ export class SearchBar extends FieldGroup {
 
   constructor() {
     super();
-    if (!this.shadowRoot) {
-      throw new Error('expects shadow root');
-    }
+    // if (!this.shadowRoot) {
+    //   throw new Error('expects shadow root');
+    // }
 
     console.log('%cHello search', 'color: orange;');
 
     this.classList.add('has-addons');
     this.spotifyHelper = spotifyHelperInstance;
 
-    this.shadowRoot.appendChild(addonTemplate.content.cloneNode(true));
+    this.appendChild(addonTemplate.content.cloneNode(true));
 
     // this works because the events bubble - yay bubbles! (we could query select the input if we wanted though)
     this.addEventListener('keypress', debounce(this.onSearchKeypress.bind(this), 250));
 
-    (this.shadowRoot.querySelector('button') as HTMLButtonElement).addEventListener('click', this.onSearchClick.bind(this));
+    (this.querySelector('button') as HTMLButtonElement).addEventListener('click', this.onSearchClick.bind(this));
   }
 
   public get searchResults(): ISpotifyArtistSearchResults | undefined {
@@ -88,20 +79,6 @@ export class SearchBar extends FieldGroup {
       this._searchResults = searchResults;
       const resultsChangeEvent = new SearchResultsChangedEvent(searchResults);
       this.dispatchEvent(resultsChangeEvent);
-
-      const resultTemplateInstance = resultListTemplate.content.cloneNode(true) as HTMLElement;
-      const elResultList = resultTemplateInstance.querySelector('ul') as HTMLUListElement;
-
-      searchResults.artists.items.forEach((artist) => {
-        const elLi = document.createElement('li');
-        elLi.textContent = artist.name;
-        elLi.addEventListener('click', () => console.log('%cList item clicked - TODO', 'color: red; font-weight: bold;'));
-        elResultList.appendChild(elLi);
-      });
-
-      if (this.shadowRoot) {
-        this.shadowRoot.appendChild(resultTemplateInstance);
-      }
     } catch (ex) {
       alert(`Failed to load search results ${ex.message || ex}`);
     }

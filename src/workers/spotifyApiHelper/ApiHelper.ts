@@ -1,4 +1,4 @@
-import { IPlaylistData } from '../../interfaces/WorkerMessage';
+import { IPlaylistData, MessageType } from '../../interfaces/WorkerMessage';
 import { ISpotifyUser } from '../../interfaces/spotify/SpotifyUser';
 import { IAuthTokens } from '../../interfaces/AuthTokens';
 
@@ -15,12 +15,13 @@ export class ApiHelper {
   private accessToken: string | void = '';
   private refreshToken: string | void = '';
   private expiresAt: number;
+  private country: string = '';
 
   constructor() {
     const params = this.getHashParams();
     this.accessToken = params.access_token;
     this.refreshToken = params.refresh_token;
-    this.expiresAt = params.expiresAt || 0;
+    this.expiresAt = params.expiresAt ? parseInt(params.expiresAt, 10) : 0;
   }
 
   public get authUrl() {
@@ -37,11 +38,26 @@ export class ApiHelper {
     return !!this.accessToken;
   }
 
-  public getUserData(): Promise<ISpotifyUser> {
-    return this.makeRequest('me', REQUEST_TYPE.GET);
+  public async getUserData(): Promise<ISpotifyUser> {
+    const userData = await this.makeRequest('me', REQUEST_TYPE.GET) as ISpotifyUser;
+    // save the user's country
+    this.country = userData.country;
+
+    return userData;
   }
 
-  public async search(query: string, type: string, market = 'us', limit = 10, offset = 0) {
+  public async search(query: string, type: string, market?: string, limit = 10, offset = 0) {
+    // if there's no market - use the user's country
+    if (!market) {
+      market = this.country;
+    }
+
+    // if there's still no market - we didn't pull one from spotify - so make them log in
+    if (!market) {
+      // TODO
+      throw new Error(`Not Signed in - TODO send a message to login`);
+    }
+
     const queryString = `q=${escape(query)}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`;
 
     return await this.makeRequest(`search?${queryString}`);
@@ -106,7 +122,7 @@ export class ApiHelper {
     return json;
   }
 
-  private getHashParams(): {access_token?: string, refresh_token?: string, error? :string, expiresAt?: number} {
+  private getHashParams(): {access_token?: string, refresh_token?: string, error? :string, expiresAt?: string} {
     const hashParams = {} as any;
     let e: any;
     const r = /([^&;=]+)=?([^&;]*)/g;
@@ -128,9 +144,20 @@ export class ApiHelper {
     if (res.ok) {
       const body = await res.json();
       this.accessToken = body.access_token;
+      this.updateTokensInStorage(body.access_token, body.expiresAt);
       return this.accessToken;
     }
 
     throw new Error('Failed to refresh token');
+  }
+
+  private updateTokensInStorage(accessToken: string, expiresAt: number) {
+    postMessage({
+      type: MessageType.storeAuthTokens,
+      data: {
+        access_token: accessToken,
+        expiresAt
+      }
+    });
   }
 }

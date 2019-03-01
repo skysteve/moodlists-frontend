@@ -1,5 +1,5 @@
 import { UserDataLoadedEvent } from './events/UserDataLoadedEvent';
-import { UserSigninRequiredEvent } from './events/UserSigninRequiredEvent';
+import { UserSigninRequiredEvent as UserSignInRequiredEvent } from './events/UserSigninRequiredEvent';
 import { IWorkerMessage, IWorkerResponseMessage, MessageType } from './interfaces/WorkerMessage';
 import { EventTypes } from './interfaces/Events';
 import { TokensLoadedEvent } from './events/TokensLoadedEvent';
@@ -33,17 +33,17 @@ export class SpotifyHelper {
       const eventBody = event.data as IWorkerResponseMessage;
       const { data, error, messageId, type } = eventBody;
 
-      if (type === MessageType.authRequired) {
-        const siginEvent = new UserSigninRequiredEvent();
-        window.dispatchEvent(siginEvent);
-        return;
-      }
-
-
-      if (type === MessageType.userData) {
-        const userEvent = new UserDataLoadedEvent(event.data.data.user);
-        window.dispatchEvent(userEvent);
-        return;
+      switch(type) {
+        case MessageType.authRequired:
+          const sigInEvent = new UserSignInRequiredEvent();
+          return window.dispatchEvent(sigInEvent);
+        case MessageType.userData:
+          const userEvent = new UserDataLoadedEvent(event.data.data.user);
+          return window.dispatchEvent(userEvent);
+        case MessageType.storeAuthTokens:
+          return this.storeTokens(data);
+        default:
+          // handled below
       }
 
       if (messageId) {
@@ -71,10 +71,22 @@ export class SpotifyHelper {
   }
 
   private onAuthTokensLoaded(event: TokensLoadedEvent): void {
+    this.storeTokens(event.tokens);
     this.spotifyWorker.postMessage({
       type: MessageType.authTokensLoaded,
       tokens: event.tokens
     });
+  }
+
+  private storeTokens(tokens: {access_token: string, refresh_token?: string; expiresAt: number}): void {
+    console.log('%cSTORING TOKENS', 'color: blue; font-size: 5rem;', tokens);
+    localStorage.setItem('access_token', tokens.access_token);
+    localStorage.setItem('expires_at', tokens.expiresAt.toString());
+
+    // we don't get this if we refresh the tokens - obviously
+    if (tokens.refresh_token) {
+      localStorage.setItem('refresh_token', tokens.refresh_token);
+    }
   }
 }
 

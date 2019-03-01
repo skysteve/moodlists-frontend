@@ -4,3 +4,6 @@ export * from './ui-elements/SearchBar';
 export * from './modals/SignInModal';
 export * from './ui-elements/FieldGroup';
 export * from './sections/SeedList';
+export * from './ui-elements/SearchResultsPanel';
+export * from './ui-elements/SearchResultsListItem';
+export * from './ui-elements/ArtistImage';

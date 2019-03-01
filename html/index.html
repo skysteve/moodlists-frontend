@@ -35,16 +35,17 @@
       </div>
     </nav>
     <div class="container" id="main-content">
-      <h3 class="is-flex content-centered">Loading...</h3>
+      <h2 class="is-flex content-centered subtitle">Loading...</h2>
       <loading-icon class="is-flex content-centered"></loading-icon>
     </div>
 
     <template id="section-seed-list">
-
-      <search-bar label="Artist Name">
-        <input slot="input" class="input is-fullwidth" type="text" placeholder="e.g. Gareth Emery" />
+      <h2 class="subtitle">Choose some artists</h2>
+      <p>Start by choosing up to 5 artists you're into</p>
+      <search-bar label="">
+        <input slot="input" class="input is-fullwidth" type="text" placeholder="Search for an artist e.g. Gareth Emery" />
       </search-bar>
-
+      <search-results-panel></search-results-panel>
     </template>
 
     <!-- TODO can we load this only when necessary? -->

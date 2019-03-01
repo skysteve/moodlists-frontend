@@ -7,12 +7,26 @@ $primary: #FB5050;
 @import "bulma/sass/base/_all.sass";
 @import "bulma/sass/grid/columns.sass";
 
+@import "bulma/sass/layout/section.sass";
+
 @import "bulma/sass/elements/button.sass";
+@import "bulma/sass/elements/container.sass";
+@import "bulma/sass/elements/content.sass";
 @import "bulma/sass/elements/form.sass";
+@import "bulma/sass/elements/image.sass";
+@import "bulma/sass/elements/title.sass";
 
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/components/modal.sass";
+@import "bulma/sass/components/panel.sass";
 
+@import "./components/artist-image.scss";
+@import "./components/search-bar.scss";
+@import "./components/search-results-panel.scss";
+
+.is-hidden {
+  display: none;
+}
 
 .navbar-title {
   font-weight: bold;
@@ -21,4 +35,8 @@ $primary: #FB5050;
 .content-centered {
   justify-content: center;
   align-items: center;
+}
+
+seed-list {
+  margin-top: 1rem;
 }

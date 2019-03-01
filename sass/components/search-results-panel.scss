@@ -1,0 +1,22 @@
+
+.search-results-panel {
+  min-width: 100%;
+  position: relative;
+  top: -2.25rem;
+  border-top: none;
+  margin-top: 0;
+
+  .panel-heading {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .search-result-list-item {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    padding: 0.25rem 0;
+    cursor: pointer;
+  }
+}
