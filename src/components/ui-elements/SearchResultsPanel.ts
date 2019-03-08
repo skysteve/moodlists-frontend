@@ -1,5 +1,6 @@
 import {ISpotifyArtistSearchResults, ISpotifyArtist} from '../../interfaces/spotify/SpotifyAristSearchResults';
 import {SearchResultsListItem} from './SearchResultsListItem';
+import {SeedArtistSelectedEvent} from '../../events/SeedArtistSelectedEvent';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -54,7 +55,8 @@ export class SearchResultsPanel extends HTMLElement {
   }
 
   private onResultClicked(artist: ISpotifyArtist) {
-    alert(`artist selected ${artist.name}`);
+    const selectedEvent = new SeedArtistSelectedEvent(artist);
+    this.dispatchEvent(selectedEvent);
   }
 }
 

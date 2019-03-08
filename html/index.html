@@ -40,12 +40,24 @@
     </div>
 
     <template id="section-seed-list">
-      <h2 class="subtitle">Choose some artists</h2>
-      <p>Start by choosing up to 5 artists you're into</p>
-      <search-bar label="">
-        <input slot="input" class="input is-fullwidth" type="text" placeholder="Search for an artist e.g. Gareth Emery" />
-      </search-bar>
-      <search-results-panel></search-results-panel>
+      <div class="seed-header">
+        <h2 class="subtitle">Choose some artists</h2>
+        <p>Start by choosing up to 5 artists you're into</p>
+      </div>
+      <div class="seed-search-panel">
+        <search-bar label="">
+          <input slot="input" class="input is-fullwidth" type="text" placeholder="Search for an artist e.g. Gareth Emery" />
+        </search-bar>
+        <search-results-panel></search-results-panel>
+      </div>
+      <div class="seed-selected is-hidden panel">
+        <p class="panel-heading">
+          Selected Artists:
+        </p>
+        <div class="panel-block">
+        <ul></ul>
+        </div>
+      </div>
     </template>
 
     <!-- TODO can we load this only when necessary? -->

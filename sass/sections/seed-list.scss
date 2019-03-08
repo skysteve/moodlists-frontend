@@ -1,0 +1,28 @@
+
+.section-seed-list {
+  display: flex;
+  flex-wrap: wrap;
+
+  .seed-header {
+    min-width: 100%;
+  }
+
+  .seed-search-panel {
+    flex-basis: 45%;
+    flex-grow: 1;
+    margin-right: 0.5em;
+  }
+
+  .seed-selected {
+    margin-left: 0.5em;
+    flex-basis: 45%;
+
+    ul {
+      width: 100%;
+
+      li {
+        width: 100%;
+      }
+    }
+  }
+}

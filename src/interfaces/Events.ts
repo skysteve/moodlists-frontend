@@ -1,6 +1,8 @@
 export enum EventTypes {
   authTokensLoaded = 'authTokensLoaded',
-  searchResultsLoaded = 'searcResultsLoaded',
+  seedArtistSelected = 'seedArtistSelected',
+  searchResultsLoaded = 'searchResultsLoaded',
+  selectedArtistRemoved = 'selectedArtistRemoved',
   userData = 'userData',
   userSigninRequired = 'userSigninRequired'
 }

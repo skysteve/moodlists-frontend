@@ -1,0 +1,12 @@
+
+.selected-artist-list-item {
+  /* TODO - this should extend search result */
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 0.25rem 0;
+
+  span {
+    flex-grow: 1;
+  }
+}
