@@ -1,9 +1,11 @@
 import { EventTypes } from '../../../interfaces/Events';
 import { SearchResultsChangedEvent } from '../../../events/SearchResultsChangedEvent';
-import { SearchResultsPanel } from '../../ui-elements/SearchResultsPanel';
+import { SearchResultsPanel } from './searchPanel/SearchResultsPanel';
 import { SeedArtistSelectedEvent } from '../../../events/SeedArtistSelectedEvent';
 import { ISpotifyArtist } from '../../../interfaces/spotify/SpotifyAristSearchResults';
 import {SelectedArtist} from './selectedArtists/SelectedArtist';
+import { SelectedArtistRemovedEvent } from '../../../events/SelectedArtistRemovedEvent';
+import { SearchBar } from './searchPanel/SearchBar';
 
 
 export class SeedList extends HTMLElement {
@@ -41,6 +43,7 @@ export class SeedList extends HTMLElement {
       return;
     }
 
+    this.elSearchBar.reset();
     this.selectedArtists.push(artist);
 
     const elSelectedSeeds = this.elSelectedSeeds;
@@ -62,7 +65,7 @@ export class SeedList extends HTMLElement {
 
     // remove the element from the list, and the dom
     this.selectedArtists = this.selectedArtists.filter((artist) => artist.id !== removedArtist.id);
-    event.target.remove();
+    (event.target as HTMLElement).remove();
 
     if (this.selectedArtists.length < 1) {
       this.elSelectedSeeds.classList.add('is-hidden');
@@ -71,6 +74,10 @@ export class SeedList extends HTMLElement {
 
   private get elSelectedSeeds(): HTMLDivElement {
     return this.querySelector('.seed-selected') as HTMLDivElement;
+  }
+
+  private get elSearchBar(): SearchBar {
+    return this.querySelector('search-bar') as SearchBar;
   }
 }
 

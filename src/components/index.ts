@@ -3,11 +3,12 @@ export * from './icons/LoadingIcon';
 
 export * from './modals/SignInModal';
 
+export * from './sections/seedList/searchPanel/SearchBar';
+export * from './sections/seedList/searchPanel/SearchResultsPanel';
+export * from './sections/seedList/searchPanel/SearchResultsListItem';
+
 export * from './sections/seedList/SeedList';
 export * from './sections/seedList/selectedArtists/SelectedArtist';
 
-export * from './ui-elements/SearchBar';
 export * from './ui-elements/FieldGroup';
-export * from './ui-elements/SearchResultsPanel';
-export * from './ui-elements/SearchResultsListItem';
 export * from './ui-elements/ArtistImage';

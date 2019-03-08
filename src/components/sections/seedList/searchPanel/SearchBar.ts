@@ -1,11 +1,11 @@
-import {ISpotifyArtistSearchResults} from '../../interfaces/spotify/SpotifyAristSearchResults';
-import { MessageType } from '../../interfaces/WorkerMessage';
+import {ISpotifyArtistSearchResults} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
+import { MessageType } from '../../../../interfaces/WorkerMessage';
 
-import { SpotifyHelper, spotifyHelperInstance} from '../../SpotifyHelper';
-import { debounce } from '../../helpers';
+import { SpotifyHelper, spotifyHelperInstance} from '../../../../SpotifyHelper';
+import { debounce } from '../../../../helpers';
 
-import { SearchResultsChangedEvent } from '../../events/SearchResultsChangedEvent';
-import { FieldGroup } from './FieldGroup';
+import { SearchResultsChangedEvent } from '../../../../events/SearchResultsChangedEvent';
+import { FieldGroup } from '../../../ui-elements/FieldGroup';
 
 const addonTemplate = document.createElement('template');
 addonTemplate.innerHTML = `<div class="control">
@@ -40,6 +40,11 @@ export class SearchBar extends FieldGroup {
 
   public get searchResults(): ISpotifyArtistSearchResults | undefined {
     return this._searchResults;
+  }
+
+  public reset(): void {
+    const elInput = this.querySelector('input') as HTMLInputElement;
+    elInput.value = '';
   }
 
   private onSearchKeypress(event: KeyboardEvent): void {

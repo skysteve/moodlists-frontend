@@ -1,6 +1,7 @@
-import {ISpotifyArtistSearchResults, ISpotifyArtist} from '../../interfaces/spotify/SpotifyAristSearchResults';
+import {ISpotifyArtistSearchResults, ISpotifyArtist} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
 import {SearchResultsListItem} from './SearchResultsListItem';
-import {SeedArtistSelectedEvent} from '../../events/SeedArtistSelectedEvent';
+import {SeedArtistSelectedEvent} from '../../../../events/SeedArtistSelectedEvent';
+import { EventTypes } from '../../../../interfaces/Events';
 
 const template = document.createElement('template');
 template.innerHTML = `
@@ -25,6 +26,8 @@ export class SearchResultsPanel extends HTMLElement {
 
     const elTemplate = template.content.cloneNode(true) as HTMLElement;
     this.appendChild(elTemplate);
+
+    this.addEventListener(EventTypes.seedArtistSelected, this.onArtistSelected.bind(this));
   }
 
   public connectedCallback() {
@@ -42,21 +45,24 @@ export class SearchResultsPanel extends HTMLElement {
       return;
     }
 
-    const elPanelBody = this.querySelector('.panel-block ul') as HTMLDivElement;
+    const elPanelBody = this.elResultList;
     elPanelBody.innerHTML = ''; // clear out existing results
 
     this._searchResults.artists.items.forEach((artist) => {
       const elResult = new SearchResultsListItem(artist);
-      elResult.addEventListener('click', this.onResultClicked.bind(this, artist));
       elPanelBody.appendChild(elResult);
     });
 
     this.classList.remove('is-hidden');
   }
 
-  private onResultClicked(artist: ISpotifyArtist) {
-    const selectedEvent = new SeedArtistSelectedEvent(artist);
-    this.dispatchEvent(selectedEvent);
+  private onArtistSelected(event: SeedArtistSelectedEvent) {
+    // on artist selected, hide self
+    this.classList.add('is-hidden');
+  }
+
+  private get elResultList(): HTMLUListElement {
+    return this.querySelector('.panel-block ul') as HTMLUListElement;
   }
 }
 
