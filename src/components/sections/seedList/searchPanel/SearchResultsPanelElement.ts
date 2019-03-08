@@ -1,5 +1,5 @@
 import {ISpotifyArtistSearchResults} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
-import {SearchResultsListItem} from './SearchResultsListItem';
+import {SearchResultsListItemElement} from './SearchResultsListItemElement';
 import {SeedArtistSelectedEvent} from '../../../../events/SeedArtistSelectedEvent';
 import { EventTypes } from '../../../../interfaces/Events';
 
@@ -13,7 +13,7 @@ template.innerHTML = `
 </div>
 `;
 
-export class SearchResultsPanel extends HTMLElement {
+export class SearchResultsPanelElement extends HTMLElement {
   // tslint:disable-next-line:variable-name
   private _searchResults: ISpotifyArtistSearchResults | undefined;
 
@@ -49,7 +49,7 @@ export class SearchResultsPanel extends HTMLElement {
     elPanelBody.innerHTML = ''; // clear out existing results
 
     this._searchResults.artists.items.forEach((artist) => {
-      const elResult = new SearchResultsListItem(artist);
+      const elResult = new SearchResultsListItemElement(artist);
       elPanelBody.appendChild(elResult);
     });
 
@@ -66,4 +66,4 @@ export class SearchResultsPanel extends HTMLElement {
   }
 }
 
-customElements.define('search-results-panel', SearchResultsPanel);
+customElements.define('search-results-panel', SearchResultsPanelElement);

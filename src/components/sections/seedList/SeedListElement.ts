@@ -1,15 +1,14 @@
 import { EventTypes } from '../../../interfaces/Events';
 import { SearchResultsChangedEvent } from '../../../events/SearchResultsChangedEvent';
-import { SearchResultsPanel } from './searchPanel/SearchResultsPanel';
+import { SearchResultsPanelElement } from './searchPanel/SearchResultsPanelElement';
 import { SeedArtistSelectedEvent } from '../../../events/SeedArtistSelectedEvent';
 import { ISpotifyArtist } from '../../../interfaces/spotify/SpotifyAristSearchResults';
-import {SelectedArtist} from './selectedArtists/SelectedArtist';
 import { SelectedArtistRemovedEvent } from '../../../events/SelectedArtistRemovedEvent';
-import { SearchBar } from './searchPanel/SearchBar';
-import { SelectedArtistsPanel } from './selectedArtists/SelectedArtistsPanel';
+import { SearchBarElement } from './searchPanel/SearchBarElement';
+import { SelectedArtistsPanelElement } from './selectedArtists/SelectedArtistsPanelElement';
 
 
-export class SeedList extends HTMLElement {
+export class SeedListElement extends HTMLElement {
   private selectedArtists: ISpotifyArtist[] = [];
 
   constructor() {
@@ -30,7 +29,7 @@ export class SeedList extends HTMLElement {
   private onSearchResultsLoaded(event: SearchResultsChangedEvent) {
     event.stopPropagation();
     console.log('%cLoaded search results', 'color: green;');
-    const elSearchResults = this.querySelector('search-results-panel') as SearchResultsPanel;
+    const elSearchResults = this.querySelector('search-results-panel') as SearchResultsPanelElement;
 
     elSearchResults.searchResults = event.searchResults;
   }
@@ -67,15 +66,15 @@ export class SeedList extends HTMLElement {
     }
   }
 
-  private get elSelectedSeedsPanel(): SelectedArtistsPanel {
-    return this.querySelector('.seed-selected') as SelectedArtistsPanel;
+  private get elSelectedSeedsPanel(): SelectedArtistsPanelElement {
+    return this.querySelector('.seed-selected') as SelectedArtistsPanelElement;
   }
 
-  private get elSearchBar(): SearchBar {
-    return this.querySelector('search-bar') as SearchBar;
+  private get elSearchBar(): SearchBarElement {
+    return this.querySelector('search-bar') as SearchBarElement;
   }
 }
 
 
 
-customElements.define('seed-list', SeedList);
+customElements.define('seed-list', SeedListElement);

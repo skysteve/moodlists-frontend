@@ -3,13 +3,13 @@ export * from './icons/LoadingIcon';
 
 export * from './modals/SignInModal';
 
-export * from './sections/seedList/searchPanel/SearchBar';
-export * from './sections/seedList/searchPanel/SearchResultsPanel';
-export * from './sections/seedList/searchPanel/SearchResultsListItem';
+export * from './sections/seedList/searchPanel/SearchBarElement';
+export * from './sections/seedList/searchPanel/SearchResultsPanelElement';
+export * from './sections/seedList/searchPanel/SearchResultsListItemElement';
 
-export * from './sections/seedList/SeedList';
-export * from './sections/seedList/selectedArtists/SelectedArtist';
-export * from './sections/seedList/selectedArtists/SelectedArtistsPanel';
+export * from './sections/seedList/SeedListElement';
+export * from './sections/seedList/selectedArtists/SelectedArtistElement';
+export * from './sections/seedList/selectedArtists/SelectedArtistsPanelElement';
 
-export * from './ui-elements/FieldGroup';
-export * from './ui-elements/ArtistImage';
+export * from './ui-elements/FieldGroupElement';
+export * from './ui-elements/ArtistImageElement';

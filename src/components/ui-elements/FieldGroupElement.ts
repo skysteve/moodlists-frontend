@@ -7,7 +7,7 @@ template.innerHTML = `
 </div>
 `;
 
-export class FieldGroup extends HTMLElement {
+export class FieldGroupElement extends HTMLElement {
 
   constructor() {
     super();
@@ -24,4 +24,4 @@ export class FieldGroup extends HTMLElement {
 
 }
 
-customElements.define('field-group', FieldGroup);
+customElements.define('field-group', FieldGroupElement);

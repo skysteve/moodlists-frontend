@@ -5,7 +5,7 @@ import { SpotifyHelper, spotifyHelperInstance} from '../../../../SpotifyHelper';
 import { debounce } from '../../../../helpers';
 
 import { SearchResultsChangedEvent } from '../../../../events/SearchResultsChangedEvent';
-import { FieldGroup } from '../../../ui-elements/FieldGroup';
+import { FieldGroupElement } from '../../../ui-elements/FieldGroupElement';
 
 const addonTemplate = document.createElement('template');
 addonTemplate.innerHTML = `<div class="control">
@@ -13,7 +13,7 @@ addonTemplate.innerHTML = `<div class="control">
 </div>
 `;
 
-export class SearchBar extends FieldGroup {
+export class SearchBarElement extends FieldGroupElement {
   // tslint:disable-next-line:variable-name
   private _searchResults: ISpotifyArtistSearchResults | undefined;
   private spotifyHelper: SpotifyHelper;
@@ -93,4 +93,4 @@ export class SearchBar extends FieldGroup {
 }
 
 
-customElements.define('search-bar', SearchBar);
+customElements.define('search-bar', SearchBarElement);

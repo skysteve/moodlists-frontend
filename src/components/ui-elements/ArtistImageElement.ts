@@ -6,7 +6,7 @@ template.innerHTML = `
 </figure>
 `;
 
-export class ArtistImage extends HTMLElement {
+export class ArtistImageElement extends HTMLElement {
   constructor(srcUrl: string) {
     super();
     this.classList.add('artist-image');
@@ -23,4 +23,4 @@ export class ArtistImage extends HTMLElement {
   }
 }
 
-customElements.define('artist-image', ArtistImage);
+customElements.define('artist-image', ArtistImageElement);

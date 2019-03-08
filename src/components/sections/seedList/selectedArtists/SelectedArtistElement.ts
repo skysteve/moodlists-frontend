@@ -1,7 +1,7 @@
 import { ISpotifyArtist } from '../../../../interfaces/spotify/SpotifyAristSearchResults';
 import {SelectedArtistRemovedEvent} from '../../../../events/SelectedArtistRemovedEvent';
 
-export class SelectedArtist extends HTMLLIElement {
+export class SelectedArtistElement extends HTMLLIElement {
   private artist: ISpotifyArtist;
 
   constructor(artist: ISpotifyArtist) {
@@ -26,4 +26,4 @@ export class SelectedArtist extends HTMLLIElement {
   }
 }
 
-customElements.define('selected-artist', SelectedArtist, {extends: 'li'});
+customElements.define('selected-artist', SelectedArtistElement, {extends: 'li'});

@@ -1,7 +1,7 @@
 import {ISpotifyArtist} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
 import { SeedArtistSelectedEvent } from '../../../../events/SeedArtistSelectedEvent';
 
-export class SearchResultsListItem extends HTMLLIElement {
+export class SearchResultsListItemElement extends HTMLLIElement {
   private artist: ISpotifyArtist;
 
   constructor(artist: ISpotifyArtist) {
@@ -23,4 +23,4 @@ export class SearchResultsListItem extends HTMLLIElement {
   }
 }
 
-customElements.define('search-results-list-item', SearchResultsListItem, {extends: 'li'});
+customElements.define('search-results-list-item', SearchResultsListItemElement, {extends: 'li'});

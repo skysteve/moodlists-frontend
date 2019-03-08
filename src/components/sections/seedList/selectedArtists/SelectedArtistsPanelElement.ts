@@ -1,5 +1,5 @@
 import { ISpotifyArtist } from '../../../../interfaces/spotify/SpotifyAristSearchResults';
-import { SelectedArtist } from './SelectedArtist';
+import { SelectedArtistElement } from './SelectedArtistElement';
 
 const template = document.createElement('template');
 template.innerHTML = `<p class="panel-heading">Selected Artists:</p>
@@ -10,7 +10,7 @@ template.innerHTML = `<p class="panel-heading">Selected Artists:</p>
   <button class="button is-link is-outlined is-fullwidth" id="btn-selected-next">Next</button>
 </div>`;
 
-export class SelectedArtistsPanel extends HTMLElement {
+export class SelectedArtistsPanelElement extends HTMLElement {
 
   constructor() {
     super();
@@ -25,9 +25,9 @@ export class SelectedArtistsPanel extends HTMLElement {
 
     this.classList.remove('is-hidden');
 
-    const listItem = new SelectedArtist(artist);
+    const listItem = new SelectedArtistElement(artist);
     elResultList.appendChild(listItem);
   }
 }
 
-customElements.define('selected-artist-panel', SelectedArtistsPanel);
+customElements.define('selected-artist-panel', SelectedArtistsPanelElement);
