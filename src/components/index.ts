@@ -9,6 +9,7 @@ export * from './sections/seedList/searchPanel/SearchResultsListItem';
 
 export * from './sections/seedList/SeedList';
 export * from './sections/seedList/selectedArtists/SelectedArtist';
+export * from './sections/seedList/selectedArtists/SelectedArtistsPanel';
 
 export * from './ui-elements/FieldGroup';
 export * from './ui-elements/ArtistImage';

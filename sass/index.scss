@@ -22,12 +22,8 @@ $primary: #FB5050;
 @import "bulma/sass/components/panel.sass";
 
 @import "./components/artist-image.scss";
-@import "./components/search-bar.scss";
-@import "./components/search-results-panel.scss";
-@import "./components/selected-artist.scss";
 
-
-@import "./sections/seed-list.scss";
+@import "./sections/seedList/index.scss";
 
 .is-hidden {
   display: none;

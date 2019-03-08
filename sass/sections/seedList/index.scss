@@ -1,3 +1,7 @@
+@import "./components/search-bar.scss";
+@import "./components/search-results-panel.scss";
+@import "./components/selected-artist.scss";
+@import "./components/selected-artists-panel.scss";
 
 .section-seed-list {
   display: flex;
@@ -14,15 +18,6 @@
   }
 
   .seed-selected {
-    margin-left: 0.5em;
-    flex-basis: 45%;
-
-    ul {
-      width: 100%;
-
-      li {
-        width: 100%;
-      }
-    }
+    @extend %seed-selected;
   }
 }

@@ -6,6 +6,7 @@ import { ISpotifyArtist } from '../../../interfaces/spotify/SpotifyAristSearchRe
 import {SelectedArtist} from './selectedArtists/SelectedArtist';
 import { SelectedArtistRemovedEvent } from '../../../events/SelectedArtistRemovedEvent';
 import { SearchBar } from './searchPanel/SearchBar';
+import { SelectedArtistsPanel } from './selectedArtists/SelectedArtistsPanel';
 
 
 export class SeedList extends HTMLElement {
@@ -46,13 +47,7 @@ export class SeedList extends HTMLElement {
     this.elSearchBar.reset();
     this.selectedArtists.push(artist);
 
-    const elSelectedSeeds = this.elSelectedSeeds;
-    const elResultList = elSelectedSeeds.querySelector('ul') as HTMLUListElement;
-
-    elSelectedSeeds.classList.remove('is-hidden');
-
-    const listItem = new SelectedArtist(artist);
-    elResultList.appendChild(listItem);
+    this.elSelectedSeedsPanel.addArtist(artist);
 
     if (this.selectedArtists.length >= 5) {
       const elSearchPanel = this.querySelector('.seed-search-panel') as HTMLDivElement;
@@ -68,12 +63,12 @@ export class SeedList extends HTMLElement {
     (event.target as HTMLElement).remove();
 
     if (this.selectedArtists.length < 1) {
-      this.elSelectedSeeds.classList.add('is-hidden');
+      this.elSelectedSeedsPanel.classList.add('is-hidden');
     }
   }
 
-  private get elSelectedSeeds(): HTMLDivElement {
-    return this.querySelector('.seed-selected') as HTMLDivElement;
+  private get elSelectedSeedsPanel(): SelectedArtistsPanel {
+    return this.querySelector('.seed-selected') as SelectedArtistsPanel;
   }
 
   private get elSearchBar(): SearchBar {

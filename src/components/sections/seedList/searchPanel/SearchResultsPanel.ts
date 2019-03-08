@@ -1,4 +1,4 @@
-import {ISpotifyArtistSearchResults, ISpotifyArtist} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
+import {ISpotifyArtistSearchResults} from '../../../../interfaces/spotify/SpotifyAristSearchResults';
 import {SearchResultsListItem} from './SearchResultsListItem';
 import {SeedArtistSelectedEvent} from '../../../../events/SeedArtistSelectedEvent';
 import { EventTypes } from '../../../../interfaces/Events';
