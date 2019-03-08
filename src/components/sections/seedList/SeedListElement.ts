@@ -6,15 +6,15 @@ import { ISpotifyArtist } from '../../../interfaces/spotify/SpotifyAristSearchRe
 import { SelectedArtistRemovedEvent } from '../../../events/SelectedArtistRemovedEvent';
 import { SearchBarElement } from './searchPanel/SearchBarElement';
 import { SelectedArtistsPanelElement } from './selectedArtists/SelectedArtistsPanelElement';
+import { SectionElement } from '../../ui-elements/SectionElement';
 
-
-export class SeedListElement extends HTMLElement {
+export class SeedListElement extends SectionElement {
   private selectedArtists: ISpotifyArtist[] = [];
 
   constructor() {
     super();
 
-    this.classList.add('section', 'section-seed-list');
+    this.classList.add('section-seed-list');
 
     const template = document.getElementById('section-seed-list') as HTMLTemplateElement;
     const clone = document.importNode(template.content, true);
@@ -77,4 +77,4 @@ export class SeedListElement extends HTMLElement {
 
 
 
-customElements.define('seed-list', SeedListElement);
+customElements.define('section-seed-list', SeedListElement);

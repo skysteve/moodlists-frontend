@@ -53,6 +53,19 @@
       <selected-artist-panel></selected-artist-panel>
     </template>
 
+    <template id="section-knobs">
+      <div class="seed-header">
+        <h2 class="subtitle">Tweak Your playlist</h2>
+        <p>Tweak your playlist using the tools below</p>
+      </div>
+
+      <field-group label="Danceability">
+        <range-slider slot="input" name="danceability"></range-slider>
+      </field-group>
+
+      <button class="button button-primary" id="btn-load-recommendations">Find tracks</button>
+    </template>
+
     <!-- TODO can we load this only when necessary? -->
     <template id="sign-in-modal">
       <div class="is-flex content-centered">

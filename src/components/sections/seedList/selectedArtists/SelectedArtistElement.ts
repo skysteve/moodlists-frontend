@@ -2,26 +2,30 @@ import { ISpotifyArtist } from '../../../../interfaces/spotify/SpotifyAristSearc
 import {SelectedArtistRemovedEvent} from '../../../../events/SelectedArtistRemovedEvent';
 
 export class SelectedArtistElement extends HTMLLIElement {
-  private artist: ISpotifyArtist;
+  private spotifyArtist: ISpotifyArtist;
 
   constructor(artist: ISpotifyArtist) {
     super();
     this.classList.add('selected-artist-list-item');
-    this.artist = artist;
+    this.spotifyArtist = artist;
   }
 
   public connectedCallback() {
-    const imgObj = this.artist.images[this.artist.images.length - 1] || {};
+    const imgObj = this.spotifyArtist.images[this.spotifyArtist.images.length - 1] || {};
 
-    this.innerHTML = `<artist-image src="${imgObj.url}"></artist-image><span>${this.artist.name}</span><a class="delete"></a>`;
+    this.innerHTML = `<artist-image src="${imgObj.url}"></artist-image><span>${this.spotifyArtist.name}</span><a class="delete"></a>`;
 
     const elDelete = this.querySelector('.delete') as HTMLAnchorElement;
 
     elDelete.addEventListener('click', this.onDeleteClick.bind(this));
   }
 
+  public get artist(): ISpotifyArtist {
+    return this.spotifyArtist;
+  }
+
   private onDeleteClick() {
-    const removedEvent = new SelectedArtistRemovedEvent(this.artist);
+    const removedEvent = new SelectedArtistRemovedEvent(this.spotifyArtist);
     this.dispatchEvent(removedEvent);
   }
 }

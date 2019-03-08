@@ -1,0 +1,137 @@
+range-slider {
+  position: relative;
+  height: 1.5rem;
+  border-radius: 1rem;
+  text-align: left;
+  margin: 1rem 0 1rem 0;
+  display: inline-block;
+  width: 100%;
+
+  .thumb-wrapper {
+    position: absolute;
+    left: 13px;
+    right: 15px;
+    height: 14px;
+
+    .inverse-left {
+      position: absolute;
+      left: 0;
+      height: 14px;
+      border-radius: 10px;
+      background-color: #CCC;
+      margin: 0 7px;
+      width:70%;
+    }
+
+    .inverse-right {
+      position: absolute;
+      right: 0;
+      height: 14px;
+      border-radius: 10px;
+      background-color: #CCC;
+      margin: 0 7px;
+      width:70%;
+    }
+
+    .range {
+      position: absolute;
+      left: 0;
+      height: 14px;
+      border-radius: 14px;
+      background-color: #1ABC9C;
+    }
+
+    .thumb {
+      position: absolute;
+      top: -7px;
+      z-index: 0;
+      height: 28px;
+      width: 28px;
+      text-align: left;
+      margin-left: -11px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+      background-color: #FFF;
+      border-radius: 50%;
+      outline: none;
+    }
+  }
+
+  .range-input {
+    position: absolute;
+    pointer-events: none;
+    -webkit-appearance: none;
+    z-index: 3;
+    height: 14px;
+    top: -2px;
+    width: 100%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+
+    &::-ms-track {
+      -webkit-appearance: none;
+      background: transparent;
+      color: transparent;
+    }
+
+    &::-moz-range-track {
+      -moz-appearance: none;
+      background: transparent;
+      color: transparent;
+    }
+
+    &:focus::-webkit-slider-runnable-track {
+      background: transparent;
+      border: transparent;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-thumb {
+      pointer-events: all;
+      width: 28px;
+      height: 28px;
+      border-radius: 0px;
+      border: 0 none;
+      background: red;
+    }
+
+    &::-moz-range-thumb {
+      pointer-events: all;
+      width: 28px;
+      height: 28px;
+      border-radius: 0px;
+      border: 0 none;
+      background: red;
+    }
+
+    &::-webkit-slider-thumb {
+      pointer-events: all;
+      width: 28px;
+      height: 28px;
+      border-radius: 0px;
+      border: 0 none;
+      background: red;
+      -webkit-appearance: none;
+    }
+
+    &::-ms-fill-lower {
+      background: transparent;
+      border: 0 none;
+    }
+
+    &::-ms-fill-upper {
+      background: transparent;
+      border: 0 none;
+    }
+
+    &::-ms-tooltip {
+      display: none;
+    }
+  }
+}

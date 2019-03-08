@@ -1,7 +1,18 @@
+@import "../../customisation.scss";
+
 @import "./components/search-bar.scss";
 @import "./components/search-results-panel.scss";
 @import "./components/selected-artist.scss";
 @import "./components/selected-artists-panel.scss";
+
+.section {
+  overflow: hidden;
+  &.collapsed {
+    height: 1em;
+    transition: height 0.5s; /* TODO - this doesn't work */
+    border-bottom: 1px solid $primary;
+  }
+}
 
 .section-seed-list {
   display: flex;

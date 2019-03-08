@@ -1,5 +1,6 @@
 import { ISpotifyArtist } from '../../../../interfaces/spotify/SpotifyAristSearchResults';
 import { SelectedArtistElement } from './SelectedArtistElement';
+import {AllSeedsSelectedEvent} from '../../../../events/AllSeedsSelectedEvent';
 
 const template = document.createElement('template');
 template.innerHTML = `<p class="panel-heading">Selected Artists:</p>
@@ -7,7 +8,7 @@ template.innerHTML = `<p class="panel-heading">Selected Artists:</p>
   <ul></ul>
 </div>
 <div class="panel-block">
-  <button class="button is-link is-outlined is-fullwidth" id="btn-selected-next">Next</button>
+  <button class="button is-link is-outlined is-fullwidth">Next</button>
 </div>`;
 
 export class SelectedArtistsPanelElement extends HTMLElement {
@@ -18,6 +19,8 @@ export class SelectedArtistsPanelElement extends HTMLElement {
 
     const elTemplate = template.content.cloneNode(true);
     this.appendChild(elTemplate);
+
+    (this.querySelector('button') as HTMLButtonElement).addEventListener('click', this.onNextClick.bind(this));
   }
 
   public addArtist(artist: ISpotifyArtist) {
@@ -27,6 +30,10 @@ export class SelectedArtistsPanelElement extends HTMLElement {
 
     const listItem = new SelectedArtistElement(artist);
     elResultList.appendChild(listItem);
+  }
+
+  private onNextClick() {
+    this.dispatchEvent(new AllSeedsSelectedEvent());
   }
 }
 
