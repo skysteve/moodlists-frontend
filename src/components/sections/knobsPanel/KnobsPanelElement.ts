@@ -5,6 +5,7 @@ import { SelectedArtistElement } from '../seedList/selectedArtists/SelectedArtis
 import { ISpotifyArtist } from '../../../interfaces/spotify/SpotifyAristSearchResults';
 import { IKnobSettings } from '../../../interfaces/KnobValues';
 import { RangeSliderElement } from '../../ui-elements/RangeSliderElement';
+import { RecommendationsLoadedEvent } from '../../../events/RecommendationsLoadedEvent';
 
 export class KnobsPanelElement extends SectionElement {
 
@@ -22,7 +23,7 @@ export class KnobsPanelElement extends SectionElement {
     elBtnCreate.addEventListener('click', this.loadRecommendations.bind(this));
   }
 
-  private loadRecommendations() {
+  private async loadRecommendations() {
     const elSelectedArtists = document.querySelectorAll('.selected-artist-list-item') as NodeListOf<SelectedArtistElement>;
     const artists = [] as ISpotifyArtist[];
 
@@ -36,7 +37,9 @@ export class KnobsPanelElement extends SectionElement {
 
     const message: IWorkerMessage = { type: MessageType.loadRecommendations, artists, knobs: this.knobValues};
 
-    spotifyHelperInstance.makeRequest(message);
+    const recommendations = await spotifyHelperInstance.makeRequest(message);
+    const event = new RecommendationsLoadedEvent(recommendations);
+    this.dispatchEvent(event);
   }
 
   private get knobValues(): IKnobSettings | void {

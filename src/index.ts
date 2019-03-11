@@ -11,7 +11,7 @@ function init(componentList: any) {
   const elContainer = document.getElementById('main-content') as HTMLDivElement;
 
   window.addEventListener(EventTypes.userData, (event: UserDataLoadedEvent) => {
-    elContainer.innerHTML = '<section-seed-list></section-seed-list><section-knobs-panel collapsed></section-knobs-panel>';
+    elContainer.innerHTML = '<section-seed-list></section-seed-list><section-knobs-panel collapsed></section-knobs-panel><section-recommendations-list collapsed></section-recommendations-list>';
   });
 
   window.addEventListener(EventTypes.userSigninRequired, (event: UserSigninRequiredEvent) => {

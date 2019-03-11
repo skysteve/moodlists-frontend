@@ -5,6 +5,8 @@ export * from './modals/SignInModal';
 
 export * from './sections/knobsPanel/KnobsPanelElement';
 
+export * from './sections/recommendationsList/RecommendationsListElement';
+
 export * from './sections/seedList/searchPanel/SearchBarElement';
 export * from './sections/seedList/searchPanel/SearchResultsPanelElement';
 export * from './sections/seedList/searchPanel/SearchResultsListItemElement';

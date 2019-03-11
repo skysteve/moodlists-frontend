@@ -63,7 +63,21 @@
         <range-slider slot="input" name="danceability"></range-slider>
       </field-group>
 
+      <field-group label="Energy">
+        <range-slider slot="input" name="energy"></range-slider>
+      </field-group>
+
       <button class="button button-primary" id="btn-load-recommendations">Find tracks</button>
+    </template>
+
+    <template id="section-recommendations">
+      <div class="seed-header">
+        <h2 class="subtitle">Your recommendations</h2>
+      </div>
+
+      <ul class="recommendations-result-list"></ul>
+
+      <button class="button button-primary" id="btn-create-playlist">Create playlist</button>
     </template>
 
     <!-- TODO can we load this only when necessary? -->
