@@ -12,8 +12,6 @@ export class KnobsPanelElement extends SectionElement {
   constructor() {
     super();
 
-   // this.classList.add('section-knobs-panel');
-
     const elBtnCreate = this.querySelector('#btn-load-recommendations') as HTMLInputElement;
     elBtnCreate.addEventListener('click', this.loadRecommendations.bind(this));
   }

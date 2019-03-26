@@ -55,7 +55,7 @@ export class RecommendationsListElement extends SectionElement {
 
     this.tracks.forEach((track) => {
       const elLi = document.createElement('li');
-      elLi.textContent = track.artists[0].name + ' ' + track.name;
+      elLi.textContent = track.artists[0].name + ' - ' + track.name;
       elList.appendChild(elLi);
     });
   }
