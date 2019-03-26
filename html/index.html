@@ -40,10 +40,6 @@
     </div>
 
     <template id="section-seed-list">
-      <div class="seed-header">
-        <h2 class="subtitle">Choose some artists</h2>
-        <p>Start by choosing up to 5 artists you're into</p>
-      </div>
       <div class="seed-search-panel">
         <search-bar label="">
           <input slot="input" class="input is-fullwidth" type="text" placeholder="Search for an artist e.g. Gareth Emery" />
@@ -54,11 +50,6 @@
     </template>
 
     <template id="section-knobs">
-      <div class="seed-header">
-        <h2 class="subtitle">Tweak Your playlist</h2>
-        <p>Tweak your playlist using the tools below</p>
-      </div>
-
       <field-group label="Danceability">
         <range-slider slot="input" name="danceability"></range-slider>
       </field-group>
@@ -71,14 +62,11 @@
     </template>
 
     <template id="section-recommendations">
-      <div class="seed-header">
-        <h2 class="subtitle">Your recommendations</h2>
-      </div>
-
       <ul class="recommendations-result-list"></ul>
 
       <button class="button button-primary" id="btn-create-playlist">Create playlist</button>
     </template>
+
 
     <!-- TODO can we load this only when necessary? -->
     <template id="sign-in-modal">
@@ -89,6 +77,32 @@
 
       <iframe src="http://localhost:3847/spotify-login" height="250px" id="iframe-login" />
     </template>
+
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Component
+        </p>
+        <a href="#" class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+          <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+          <br>
+          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a href="#" class="card-footer-item">Save</a>
+        <a href="#" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Delete</a>
+      </footer>
+    </div>
 
   </body>
 </html>

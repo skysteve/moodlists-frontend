@@ -14,16 +14,25 @@ export class SeedListElement extends SectionElement {
   constructor() {
     super();
 
-    this.classList.add('section-seed-list');
-
-    const template = document.getElementById('section-seed-list') as HTMLTemplateElement;
-    const clone = document.importNode(template.content, true);
-
-    this.appendChild(clone);
+    (this.querySelector('.card-content .content') as HTMLDivElement).classList.add('section-seed-list');
 
     this.addEventListener(EventTypes.searchResultsLoaded, this.onSearchResultsLoaded.bind(this));
     this.addEventListener(EventTypes.seedArtistSelected, this.onArtistSelected.bind(this));
     this.addEventListener(EventTypes.selectedArtistRemoved, this.onArtistRemoved.bind(this));
+  }
+
+  protected get canExpand(): boolean {
+    // expandable if there are selected artists
+    return true;
+  }
+
+  protected get cardTitle(): string {
+    return 'Choose some artists';
+  }
+
+  protected get content(): DocumentFragment {
+    const template = document.getElementById('section-seed-list') as HTMLTemplateElement;
+    return document.importNode(template.content, true);
   }
 
   private onSearchResultsLoaded(event: SearchResultsChangedEvent) {

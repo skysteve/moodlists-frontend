@@ -86,7 +86,7 @@ export interface ISeed {
   href: string;
 }
 
-export interface IISpotifyRecommendations {
+export interface ISpotifyRecommendations {
   tracks: ITrack[];
   seeds: ISeed[];
 }

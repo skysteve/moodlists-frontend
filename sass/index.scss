@@ -16,6 +16,7 @@
 @import "bulma/sass/elements/other.sass";
 @import "bulma/sass/elements/title.sass";
 
+@import "bulma/sass/components/card.sass";
 @import "bulma/sass/components/navbar.sass";
 @import "bulma/sass/components/modal.sass";
 @import "bulma/sass/components/panel.sass";
@@ -41,4 +42,42 @@
 
 seed-list {
   margin-top: 1rem;
+}
+
+.card {
+  display: block;
+  margin: 1rem 0;
+
+  .card-header {
+    cursor: pointer;
+  }
+
+  .icon {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.collapsed {
+    .card-content {
+      display: none;
+    }
+  }
+}
+
+.icon-caret {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+
+  border-top: 10px solid #f00;
+}
+
+create-playlist-modal {
+  button {
+    float: right;
+    margin-top: 1.5rem;
+  }
 }

@@ -12,15 +12,24 @@ export class KnobsPanelElement extends SectionElement {
   constructor() {
     super();
 
-    this.classList.add('section-knobs-panel');
-
-    const template = document.getElementById('section-knobs') as HTMLTemplateElement;
-    const clone = document.importNode(template.content, true);
-
-    this.appendChild(clone);
+   // this.classList.add('section-knobs-panel');
 
     const elBtnCreate = this.querySelector('#btn-load-recommendations') as HTMLInputElement;
     elBtnCreate.addEventListener('click', this.loadRecommendations.bind(this));
+  }
+
+  protected get cardTitle(): string {
+    return 'Tweak Your playlist';
+  }
+
+  protected get content(): DocumentFragment {
+    const template = document.getElementById('section-knobs') as HTMLTemplateElement;
+    return document.importNode(template.content, true);
+  }
+
+  protected get canExpand(): boolean {
+    // expandable if there are selected artists
+    return !!document.querySelector('.selected-artist-list-item');
   }
 
   private async loadRecommendations() {
@@ -40,6 +49,7 @@ export class KnobsPanelElement extends SectionElement {
     const recommendations = await spotifyHelperInstance.makeRequest(message);
     const event = new RecommendationsLoadedEvent(recommendations);
     this.dispatchEvent(event);
+    this.toggleCollapse();
   }
 
   private get knobValues(): IKnobSettings | void {

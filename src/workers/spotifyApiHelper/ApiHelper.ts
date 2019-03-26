@@ -58,7 +58,7 @@ export class ApiHelper {
       throw new Error(`Not Signed in - TODO send a message to login`);
     }
 
-    const queryString = `q=${escape(query)}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`;
+    const queryString = `q=${escape(query.replace(/\s/g, '+'))}&type=${type}&market=${market}&limit=${limit}&offset=${offset}`;
 
     return await this.makeRequest(`search?${queryString}`);
   }
@@ -116,6 +116,13 @@ export class ApiHelper {
 
     if (res.status < 200 || res.status > 299) {
       throw new Error(`Failed to load data ${res.statusText}`);
+    }
+
+    // special case
+    if (res.status === 204) {
+      return {
+        success: true
+      };
     }
 
     const json = await res.json();

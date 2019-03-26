@@ -1,15 +1,15 @@
 import { EventTypes } from '../interfaces/Events';
-import { IISpotifyRecommendations } from '../interfaces/spotify/SpotifyRecommendations';
+import { ISpotifyRecommendations } from '../interfaces/spotify/SpotifyRecommendations';
 
 export class RecommendationsLoadedEvent extends CustomEvent<{}> {
-  constructor(userData: IISpotifyRecommendations) {
+  constructor(userData: ISpotifyRecommendations) {
     super(EventTypes.recommendationsLoaded, {
       bubbles: true,
       detail: userData
     });
   }
 
-  public get recommendations(): IISpotifyRecommendations {
-    return this.detail as IISpotifyRecommendations;
+  public get recommendations(): ISpotifyRecommendations {
+    return this.detail as ISpotifyRecommendations;
   }
 }

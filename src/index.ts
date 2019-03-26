@@ -20,6 +20,8 @@ function init(componentList: any) {
 
   window.addEventListener(EventTypes.allSeedsSelectedEvent, () => {
     const elSeedList = elContainer.querySelector('section-seed-list') as SectionElement;
+    const elKnobsPanel = elContainer.querySelector('section-knobs-panel') as SectionElement;
+    elKnobsPanel.toggleCollapse();
     elSeedList.collapseSection();
   });
 

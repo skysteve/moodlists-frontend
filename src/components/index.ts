@@ -1,6 +1,7 @@
 // this is a bit of a hack to make rollup include our components - the components register themselves
 export * from './icons/LoadingIcon';
 
+export * from './modals/CreatePlaylistModal';
 export * from './modals/SignInModal';
 
 export * from './sections/knobsPanel/KnobsPanelElement';
